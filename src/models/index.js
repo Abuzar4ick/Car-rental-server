@@ -1,4 +1,5 @@
 module.exports = {
     Books: require('./Books'),
-    Cars: require('./Cars')
+    Cars: require('./Cars'),
+    Rents: require('./Rents')
 }

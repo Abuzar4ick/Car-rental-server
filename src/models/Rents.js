@@ -1,11 +1,20 @@
 const { DataTypes } = require('sequelize')
 const sequelize = require('../config/sequelize')
+const Cars = require('./Cars')
 
-const Books = sequelize.define(
-    'books',
+const Rents = sequelize.define(
+    'rents',
     {
-        car_type: {
-            type: DataTypes.ENUM('Sport', 'Sedan', 'SUV', 'VAN', 'Minivan', 'Pickup', 'Cabriolet'),
+        car_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: Cars,
+                key: 'id'
+            }
+        },
+        phone_number: {
+            type: DataTypes.STRING,
             allowNull: false
         },
         place_rental: {
@@ -23,16 +32,15 @@ const Books = sequelize.define(
         return_date: {
             type: DataTypes.STRING,
             allowNull: false
-        },
-        phone_number: {
-            type: DataTypes.STRING,
-            allowNull: false
         }
     },
     {
         timestamps: true,
-        tableName: 'books'
+        tableName: 'rents'
     }
 )
 
-module.exports = Books
+Cars.hasMany(Rents, { foreignKey: 'car_id' })
+Rents.belongsTo(Cars, { foreignKey: 'car_id' })
+
+module.exports = Rents
