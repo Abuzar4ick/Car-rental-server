@@ -5,7 +5,6 @@ const { cloudinary } = require('../storage/cloudinary')
 // POST: /cars/create
 // For: admin
 exports.createCar = async (car, images) => {
-    console.log(car, images )
     const { brand, title, type, per_day, gear_box, fuel, doors, air_conditioner, seats, distance } = car
     const mainImage = images['main_image']?.[0]?.filename || null
     const detailImages = images['detail_images']?.map((file) => file.filename) || []

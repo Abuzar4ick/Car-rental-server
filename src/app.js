@@ -1,9 +1,18 @@
 const express = require('express')
 const app = express()
 const { carsRoute, booksRoute, adminAuthRoute, rentsRoute } = require('./routes')
+const cors = require('cors')
+const helmet = require('helmet')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use(cors())
+app.use(helmet
+    ({
+        contentSecurityPolicy: false,
+        crossOriginEmbedderPolicy: false
+    })
+)
 
 app.use('/api/cars', carsRoute)
 app.use('/api/books', booksRoute)
